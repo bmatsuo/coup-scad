@@ -1,4 +1,10 @@
 /*
+ * Copyright 2015 Bryan Matsuo
+ *
+ * This work is licensed for use by others under Creative Commons (BY-SA).
+ * */
+
+/*
  * The interior box dimensions are 103mmx146mm.  Approximately 24mm (of 146mm)
  * are needed for the player coin trays.
  * */

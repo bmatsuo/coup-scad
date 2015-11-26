@@ -1,3 +1,8 @@
+/*
+ * Copyright 2015 Bryan Matsuo
+ *
+ * This work is licensed for use by others under Creative Commons (BY-SA).
+ * */
 CoinSide=12;
 
 intersection() {
