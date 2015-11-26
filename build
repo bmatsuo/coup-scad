@@ -1,0 +1,68 @@
+#!/usr/bin/env python
+
+import os
+from os.path import (basename, splitext)
+import fabricate
+from fabricate import (main, run)
+from itertools import chain
+
+always_run = fabricate.AlwaysRunner(None)
+
+# sources contains scad files that should be rendered into stl or other file
+# formats.
+sources = [
+    'src/coup-tray.scad',
+    'src/coup-playercoins.scad',
+]
+
+openscad_bin = os.environ.get('OPENSCAD', 'openscad')
+
+
+class OpenSCADModel(object):
+
+    def __init__(self, path, name=None, vars=None):
+        self.path = path
+        self.name = name
+        self.vars = vars
+
+    def get_name(self):
+        if self.name is not None:
+            return self.name
+
+        name = basename(self.path)
+        name = splitext(name)[0]
+        return name
+
+    def cmd(self):
+        name = self.get_name()
+        out = 'out/{}.stl'.format(name)
+        cmd = [openscad_bin]
+        cmd.append(self.path)
+        cmd.append('-o')
+        cmd.append(out)
+        if self.vars is not None:
+            for k, v in self.vars.items():
+                cmd.append('-D')
+                cmd.append('%s=%s' % (k, v))
+        return cmd
+
+source_models = [OpenSCADModel(src) for src in sources]
+custom_models = [
+    OpenSCADModel(
+        path='src/applewireless-base.scad',
+        name='applewireless-base-SAMPLE',
+        vars=dict(Width=10, Thickness=3))
+]
+models = list(chain(source_models, custom_models))
+get_model = dict((m.get_name(), m) for m in models).get
+
+
+def stl():
+    run('mkdir', '-p', 'out')
+    for src in source_models:
+        run(*src.cmd())
+
+
+if __name__ == '__main__':
+    fabricate.default_command = 'stl'
+    main()
