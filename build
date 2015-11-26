@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
 import os
-from os.path import (basename, splitext)
+from os.path import (basename, dirname, splitext, join)
 import fabricate
 from fabricate import (main, run)
 from itertools import chain
+import subprocess
 
 always_run = fabricate.AlwaysRunner(None)
 
@@ -61,6 +62,29 @@ def stl():
     run('mkdir', '-p', 'out')
     for src in source_models:
         run(*src.cmd())
+
+
+def dist():
+    fabricate.autoclean()
+
+    stl()
+
+    branch = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD'])
+    branch = branch.strip()
+
+    run('mkdir', branch)
+    run('ls')
+    run('cp', 'CHANGES.md', branch)
+    run('cp', 'README.md', branch)
+    run('cp', '-r', 'out', join(branch, 'stl'))
+    run('cp', '-r', 'src', branch)
+
+    release_dir = dirname(branch)
+    if not release_dir:
+        release_dir = '.'
+
+    run('tar', '-cvzf', branch+'.tar.gz', '-C', release_dir, branch)
+    run('zip', '-r', basename(branch)+'.zip', basename(branch), cwd=release_dir)
 
 
 if __name__ == '__main__':
