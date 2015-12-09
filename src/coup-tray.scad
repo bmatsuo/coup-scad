@@ -5,13 +5,13 @@
  * */
 
 /*
- * The interior box dimensions are 103mmx146mm.  Approximately 24mm (of 146mm)
+ * The interior box dimensions are 103mmx145mm.  Approximately 24mm (of 145mm)
  * are needed for the player coin trays.
  * */
 BoxHeight = 25;
 CardHeight = 103;
 CardWidth = 65;
-TrayWidth = 57;
+TrayWidth = 56;
 Thickness = 1;
 
 coup_tray(wcard=CardWidth, size=[TrayWidth, CardHeight, BoxHeight], t=Thickness);
