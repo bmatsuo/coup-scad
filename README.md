@@ -1,4 +1,4 @@
-#Coup (SCAD)
+#Coup (OpenSCAD)
 
 Containers to organize and protect the contents of the game Coup.
 
