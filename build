@@ -13,7 +13,6 @@ always_run = fabricate.AlwaysRunner(None)
 # formats.
 sources = [
     'src/coup-tray.scad',
-    'src/coup-playercoins.scad',
 ]
 
 openscad_bin = os.environ.get('OPENSCAD', 'openscad')
