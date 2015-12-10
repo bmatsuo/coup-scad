@@ -11,7 +11,7 @@
 BoxHeight = 25;
 CardHeight = 103;
 CardWidth = 65;
-TrayWidth = 80;
+TrayWidth = 79;
 Thickness = 2;
 
 use <wedge/wedge.scad>;
