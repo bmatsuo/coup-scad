@@ -5,13 +5,12 @@
  * */
 
 /*
- * The interior box dimensions are 103mmx145mm.  Approximately 24mm (of 145mm)
- * are needed for the player coin trays.
+ * The interior box dimensions are 103mmx145mm.
  * */
 BoxHeight = 25;
 CardHeight = 103;
 CardWidth = 65;
-TrayWidth = 79;
+TrayWidth = 78.5;
 Thickness = 2;
 
 use <wedge/wedge.scad>;
@@ -22,8 +21,9 @@ coup_tray2(wcard=CardWidth, size=[TrayWidth, CardHeight, BoxHeight-Thickness], t
 
 module coup_tray2(wcard=1, size=[1, 1, 1], t=0.1, space=3) {
     d = 45;
-    dcard = 45;
-    dside = 20;
+    dcard = 43;
+    dside = 30;
+    dside2 = 0;
     wrim = size[0]-(size[2]-space)*tan(dcard);
     difference() {
     union() {
@@ -50,7 +50,7 @@ module coup_tray2(wcard=1, size=[1, 1, 1], t=0.1, space=3) {
         rotate([0, 90-dcard, 0])
         rotate([-90, 0, 0])
         translate([0, 0, -0.5])
-        wedge(r=2*(size[2]+t), h=size[1]+1, d=dside+dcard);
+        wedge(r=2*(size[2]+t), h=size[1]+1, d=dside2+dcard);
 
         difference() {
             union() {
