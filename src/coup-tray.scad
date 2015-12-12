@@ -23,7 +23,7 @@ module coup_tray2(wcard=1, size=[1, 1, 1], t=0.1, space=3) {
     d = 45;
     dcard = 43;
     dside = 30;
-    dside2 = 0;
+    dside2 = 0.1;
     wrim = size[0]-(size[2]-space)*tan(dcard);
     difference() {
     union() {
